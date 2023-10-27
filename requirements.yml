@@ -9,5 +9,6 @@ roles:
 collections:
   # Install a collection from Ansible Galaxy.
   - name: community.general
-    version: ">=7.0.0"
-    source: https://galaxy.ansible.com
+    version: ">=7.5.0"
+  - name: ansible.posix
+    version: ">=1.5.4"

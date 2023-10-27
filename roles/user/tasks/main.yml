@@ -37,8 +37,8 @@
   become: true
   become_user: "{{ item.user }}"
   ansible.builtin.git:
-    repo: https://github.com/olivomarco/dotfiles.git
-    version: master
+    repo: https://github.com/f4bio/dotfiles.git
+    version: main
     dest: "{{ item.path }}"
     accept_hostkey: true
     clone: true
@@ -62,18 +62,11 @@
     group: "{{ default_username }}"
     recurse: true
 
-# other setup
-- name: Assign public ssh key to a variable
-  ansible.builtin.command: cat /home/{{ default_username }}/{{ public_key }}
-  register: ssh_public_key
-
-- name: Add default username's public SSH key to its authorized_keys file
-  ansible.builtin.lineinfile:
-    dest: /home/{{ default_username }}/.ssh/authorized_keys
-    line: "{{ ssh_public_key.stdout }}"
+- name: Set authorized keys
+  ansible.posix.authorized_key:
+    user: us3r
     state: present
-    create: true
-    mode: "0600"
+    key: https://github.com/f4bio.keys/
 
 - name: Change root password
   ansible.builtin.user:

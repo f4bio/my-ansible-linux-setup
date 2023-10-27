@@ -2,7 +2,7 @@
 # monit
 config_monit: true
 monit_enable_email_notifications: false
-monit_email_to: "{{dot_forward_email}}"
+monit_email_to: "{{ dot_forward_email }}"
 monit_enable_web_server: false
 monit_web_server_allow_list:
   - localhost

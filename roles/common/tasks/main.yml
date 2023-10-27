@@ -47,12 +47,13 @@
 
 - name: Configure timezone
   community.general.timezone:
-    name: Europe/Berlin
+    name: "{{ timezone }}"
 
 - name: Configure ntp client and restart it
   ansible.builtin.template:
     src: ntp.conf.j2
     dest: /etc/ntp.conf
+    mode: "0600"
   notify:
     - restart ntp
     - restart cron
