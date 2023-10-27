@@ -1,6 +1,13 @@
 ---
-- src: nickjj.fail2ban
-- src: nickjj.docker
-- src: https://github.com/mrlesmithjr/ansible-monit
-- src: jnv.debian-backports
-- src: jnv.unattended-upgrades
+roles:
+  - src: nickjj.fail2ban
+  - src: nickjj.docker
+  - src: https://github.com/mrlesmithjr/ansible-monit
+  - src: jnv.debian-backports
+  - src: jnv.unattended-upgrades
+
+collections:
+  # Install a collection from Ansible Galaxy.
+  - name: community.general
+    version: ">=7.0.0"
+    source: https://galaxy.ansible.com

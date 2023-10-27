@@ -17,11 +17,11 @@
     mode: "0755"
     owner: root
     group: root
-  
-- name: Enable dm_crypt module
-  modprobe:
-    name: dm_crypt
-    state: present
+
+# - name: Enable dm_crypt module
+#   modprobe:
+#     name: dm_crypt
+#     state: present
 
 - name: Enable compress on logrotate
   lineinfile:
@@ -46,8 +46,8 @@
 #     mode: u=rw,g=r,o=r
 
 - name: Configure timezone
-  timezone:
-    name: "{{timezone}}"
+  community.general.timezone:
+    name: "Europe/Berlin"
 
 - name: Configure ntp client and restart it
   template:

@@ -1,0 +1,27 @@
+---
+- name: Ensure group "tailscale" exists
+  group:
+    name: tailscale
+    state: present
+
+- name: Ensure default user belongs also to tailscale group
+  user:
+    name: "{{default_username}}"
+    groups: tailscale
+    append: yes
+
+- name: Add rsyslog custom rules for Tailscale
+  copy:
+    src: templates/tailscale.conf
+    dest: /etc/rsyslog.d/tailscale.conf
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+
+- name: Add logrotate custom rules for Tailscale logs
+  copy:
+    src: templates/logrotate_tailscale
+    dest: /etc/logrotate.d/tailscale
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r

@@ -6,6 +6,8 @@
     - group_vars/docker.yml
     - group_vars/monit.yml
     - group_vars/networking.yml
+    - group_vars/other.yml
+    - group_vars/tailscale.yml
     - group_vars/vault.yml
   user: "{{default_username}}"  # run whole script with default user
   become: yes
@@ -26,6 +28,8 @@
     - role: docker
       when: install_docker == true
       tags: docker
+    - role: tailscale
+      tags: tailscale
     - role: jnv.debian-backports
       tags: common
     - role: ansible-monit
