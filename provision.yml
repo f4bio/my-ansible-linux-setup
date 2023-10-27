@@ -9,9 +9,9 @@
     - group_vars/other.yml
     - group_vars/tailscale.yml
     - group_vars/vault.yml
-  user: "{{default_username}}"  # run whole script with default user
-  become: yes
-  roles:  # order is not random!
+  user: "{{default_username}}" # run whole script with default user
+  become: true
+  roles: # order is not random!
     - role: nickjj.fail2ban
       tags: fail2ban
     - role: common

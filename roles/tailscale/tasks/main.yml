@@ -1,17 +1,17 @@
 ---
 - name: Ensure group "tailscale" exists
-  group:
+  ansible.builtin.group:
     name: tailscale
     state: present
 
 - name: Ensure default user belongs also to tailscale group
-  user:
-    name: "{{default_username}}"
+  ansible.builtin.user:
+    name: "{{ default_username }}"
     groups: tailscale
-    append: yes
+    append: true
 
 - name: Add rsyslog custom rules for Tailscale
-  copy:
+  ansible.builtin.copy:
     src: templates/tailscale.conf
     dest: /etc/rsyslog.d/tailscale.conf
     owner: root
@@ -19,7 +19,7 @@
     mode: u=rw,g=r,o=r
 
 - name: Add logrotate custom rules for Tailscale logs
-  copy:
+  ansible.builtin.copy:
     src: templates/logrotate_tailscale
     dest: /etc/logrotate.d/tailscale
     owner: root

@@ -1,3 +1,4 @@
+---
 - name: This command will change the working directory to somedir/
   ansible.builtin.shell:
     cmd: ls -l | grep log

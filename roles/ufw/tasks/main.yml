@@ -1,18 +1,29 @@
 ---
 - name: Apply custom connection ufw rules
-  community.general.ufw: rule="{{item.rule}}" port="{{item.port}}" src="{{item.src}}" proto="{{item.proto}}" direction="{{item.direction}}"
-  with_items: "{{ufw_rules}}"
+  community.general.ufw:
+    rule: '"{{ item.rule }}"'
+    port: '"{{ item.port }}"'
+    src: '"{{ item.src }}"'
+    proto: '"{{ item.proto }}"'
+    direction: '"{{ item.direction }}"'
+    cmd: ""
+  with_items: "{{ ufw_rules }}"
 
 #- name: Limit SSH connection rate
 #  ufw: rule=limit port=22 proto=tcp
 
 - name: Deny all incoming connections
-  community.general.ufw: "direction=incoming policy=reject"
+  community.general.ufw:
 
+    direction: incoming
+    policy: reject
+    cmd: ""
 - name: Enable logging
   community.general.ufw:
-    logging: on
+    logging: true
 
 - name: Enable firewall
-  community.general.ufw: state=enabled
+  community.general.ufw:
+    state: enabled
+    cmd: ""
   notify: reload ufw
