@@ -17,6 +17,10 @@
       tags: fail2ban
     - role: common
       tags: common
+    - role: snapd
+      tags: common
+    - role: tailscale
+      tags: tailscale
     - role: ufw
       tags: ufw
     - role: user
@@ -29,8 +33,6 @@
     - role: docker
       when: install_docker == true
       tags: docker
-    - role: tailscale
-      tags: tailscale
     - role: jnv.debian-backports
       tags: common
     - role: ansible-monit

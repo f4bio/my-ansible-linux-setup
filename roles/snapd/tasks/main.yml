@@ -1,0 +1,8 @@
+---
+- name: Disable and remove snapd
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      snap remove $(snap list | awk '!/^Name|^core/ {print $1}')
+  register: snapd_removal_output # <- Registers the command output.
+  changed_when: snapd_removal_output.rc != 0 # <- Uses the return code to define when the task has changed.
